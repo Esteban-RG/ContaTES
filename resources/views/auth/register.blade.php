@@ -12,7 +12,7 @@
           </div>
 
 
-          <form method="POST" action="">
+          <form method="POST" action="{{ route('register') }}">
             @csrf
 
             <div class="d-flex justify-content-center align-items-center">
@@ -38,7 +38,7 @@
                 </div>
                 
                                     
-                <div class="text-center mt-3"><button class="btn btn-get-started" type="submit">Registrar</button></div>
+                <div class="text-center mt-3"><button class="btn btn-get-started w-100" type="submit">Registrar</button></div>
               
               </div>
             </div>

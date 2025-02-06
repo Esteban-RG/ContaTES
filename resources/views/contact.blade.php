@@ -10,9 +10,7 @@
             <div class="col-lg-4">
   
               <div class="info">
-                <h3>Get in touch</h3>
-                <p>Et id eius voluptates atque nihil voluptatem enim in tempore minima sit ad mollitia commodi minus.</p>
-  
+                
                 <div class="info-item d-flex">
                   <i class="bi bi-geo-alt flex-shrink-0"></i>
                   <div>

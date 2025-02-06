@@ -13,7 +13,7 @@
                 </div>
 
     
-                <form method="POST" action="">
+                <form method="POST" action="{{ route('login') }}">
                   @csrf
               
                   <div class="d-flex justify-content-center align-items-center">
@@ -48,6 +48,7 @@
                       </div>
                   </div>
               </form>
+
               
               </div><!-- End Login Form -->
     
