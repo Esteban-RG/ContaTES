@@ -53,7 +53,7 @@
                         de nominas
                     </p>
                     <p class="mt-5" data-aos="fade-up">
-                        <a href="{{ url ('login')}}" class="btn btn-get-started">Acceso</a>
+                        <a href="{{ url ('home')}}" class="btn btn-get-started">Acceso</a>
                     </p>
                 </div>
             </div>

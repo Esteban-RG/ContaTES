@@ -15,8 +15,21 @@
             @if(Request::is('login'))
                 <li><a href="{{ url('/register') }}" class="active" >Registro</a></li>
             @else
-                <li><a href="{{ url('/login') }}" class="active" >Acceso</a></li>
+                <li><a href="{{ url('/home') }}" class="active" >Acceso</a></li>
             @endif
+
+            @auth            
+                            
+              <div class="dropdown">
+                <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" data-bs-auto-close="outside">
+                  {{ Auth::user()->name }}  
+                </button>
+                <form action="{{ route('logout') }}" method="POST" class="dropdown-menu p-5">
+                  @csrf
+                  <button type="submit" class="btn btn-danger">Salir</button>
+                </form>
+              </div>
+            @endauth
         </ul>
         <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
     </nav>
