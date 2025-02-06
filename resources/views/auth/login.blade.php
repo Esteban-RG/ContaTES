@@ -12,6 +12,8 @@
                   <h1 class="mt-3">Iniciar Sesión</h1>
                 </div>
 
+                <x-auth-session-status class="mb-4" :status="session('status')" />
+
     
                 <form method="POST" action="{{ route('login') }}">
                   @csrf

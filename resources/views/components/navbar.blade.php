@@ -19,16 +19,30 @@
             @endif
 
             @auth            
-                            
+            
+            
+
+            <li> 
               <div class="dropdown">
-                <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" data-bs-auto-close="outside">
+                <button class="btn btn-secondary dropdown-toggle m-2" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                   {{ Auth::user()->name }}  
                 </button>
-                <form action="{{ route('logout') }}" method="POST" class="dropdown-menu p-5">
-                  @csrf
-                  <button type="submit" class="btn btn-danger">Salir</button>
-                </form>
+                <ul class="dropdown-menu">
+                  <li><a class="dropdown-item" href="{{ route('profile.edit')}}">Perfil</a></li>
+                </ul>
               </div>
+            </li>
+
+            <li>
+              <form action="{{ route('logout') }}" method="POST">
+                @csrf
+                <button type="submit" class="btn btn-danger">Salir</button>
+              </form>
+            </li>
+
+            
+
+             
             @endauth
         </ul>
         <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>

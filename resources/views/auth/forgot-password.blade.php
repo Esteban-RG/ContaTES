@@ -1,25 +1,29 @@
-<x-guest-layout>
-    <div class="mb-4 text-sm text-gray-600">
-        {{ __('Forgot your password? No problem. Just let us know your email address and we will email you a password reset link that will allow you to choose a new one.') }}
+<x-layout title="Recuperar Contraseña">
+    <div class="alert alert-info text-center">
+        {{ __('¿Olvidaste tu contraseña? No hay problema. Solo ingresa tu dirección de correo electrónico y te enviaremos un enlace para restablecerla.') }}
     </div>
 
     <!-- Session Status -->
     <x-auth-session-status class="mb-4" :status="session('status')" />
 
-    <form method="POST" action="{{ route('password.email') }}">
-        @csrf
+    <div class=" text-center align-items-center" style="min-height: 500px">
+        <form method="POST" action="{{ route('password.email') }}" class="text-center">
+            @csrf
+    
+            <!-- Email Address -->
+            <div>
+                <label for="email" class="form-label">{{ __('Email') }}</label>
+                <input id="email" type="email" name="email" value="{{ old('email') }}" required autofocus>
+                <x-input-error :messages="$errors->get('name')" />
+            </div>
+    
+            <div>
+                <button type="submit" class="btn btn-success">
+                    {{ __('Enviar enlace de restablecimiento') }}
+                </button>
+            </div>
+        </form>
+    </div>
+    
+</x-layout>
 
-        <!-- Email Address -->
-        <div>
-            <x-input-label for="email" :value="__('Email')" />
-            <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus />
-            <x-input-error :messages="$errors->get('email')" class="mt-2" />
-        </div>
-
-        <div class="flex items-center justify-end mt-4">
-            <x-primary-button>
-                {{ __('Email Password Reset Link') }}
-            </x-primary-button>
-        </div>
-    </form>
-</x-guest-layout>
