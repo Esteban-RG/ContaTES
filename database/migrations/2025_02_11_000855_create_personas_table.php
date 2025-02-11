@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('ap_materno', 100)->nullable();
             $table->string('telefono', 20)->nullable();
             $table->enum('genero', ['M','F']);
-            $table->unsignedBigInteger('user_id')->unique()->after('persona_id'); // Relación 1:1
+            $table->unsignedBigInteger('user_id')->unique(); // Relación 1:1
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
 
