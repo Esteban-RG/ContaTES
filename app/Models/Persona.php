@@ -24,4 +24,9 @@ class Persona extends Model
     {
         return $this->belongsTo(User::class, 'user_id', 'id');
     }
+
+    public function empleado()
+    {
+        return $this->hasMany(Empleado::class, 'persona_id', 'id');
+    }
 }
