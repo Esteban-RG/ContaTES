@@ -1,11 +1,11 @@
 <section>
     <header>
         <h2 class="text-lg font-medium text-gray-900">
-            {{ __('Informacion Personal') }}
+            {{ __('Informacion de usuario') }}
         </h2>
 
         <p class="mt-1 text-sm text-gray-600">
-            {{ __("Actualiza tu información personal e email") }}
+            {{ __("Actualiza tu información de inicio de sesion") }}
         </p>
     </header>
 
@@ -16,6 +16,8 @@
     <form method="post" action="{{ route('profile.update') }}" class="mt-6 space-y-6">
         @csrf
         @method('patch')
+
+        <input type="hidden" name="table" value="user">
 
         <div>
             <x-input-label for="name" :value="__('Nombre')" />

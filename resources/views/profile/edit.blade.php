@@ -7,7 +7,13 @@
 
                     <div class="card shadow-sm mb-4">
                         <div class="card-body">
-                            @include('profile.partials.update-profile-information-form')
+                            @include('profile.partials.update-user-information-form')
+                        </div>
+                    </div>
+
+                    <div class="card shadow-sm mb-4">
+                        <div class="card-body">
+                            @include('profile.partials.update-personal-information-form')
                         </div>
                     </div>
 
