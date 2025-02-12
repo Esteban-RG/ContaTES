@@ -8,9 +8,10 @@
 
       <nav id="navmenu" class="navmenu">
         <ul>
+            
             <li><a href="{{ url('/') }}" class="{{ Request::is('/') ? 'active' : '' }}">Inicio</a></li>
             <li><a href="https://www.teschi.edu.mx">Comunidad</a></li>
-            <li><a href="{{ url('/contact') }}">Atencion y Soporte</a></li>
+            <li><a href="{{ url('/contact') }}" class="{{ Request::is('/contact') ? 'active' : '' }}">Atencion y Soporte</a></li>
             
             @if(Request::is('login'))
                 <li><a href="{{ url('/register') }}" class="active" >Registro</a></li>
@@ -20,7 +21,9 @@
 
             @auth            
             
-            
+            @if( Auth::user()->name == 'admin'   )
+            <li><a href="{{ url('/admin') }}" class="{{ Request::is('/admin') ? 'active' : '' }}">Admin</a></li>
+            @endif
 
             <li> 
               <div class="dropdown">

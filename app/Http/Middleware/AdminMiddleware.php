@@ -16,9 +16,19 @@ class AdminMiddleware
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (auth::user() && auth::user()->role !== 'admin') {
-            abort(403, 'Acceso denegado');
+        
+        // Verificar si el usuario está autenticado
+        if (!Auth::check()) {
+            return redirect()->route('login'); 
         }
-        return $next($request);
+
+        // Verificar el rol del usuario autenticado
+        if (Auth::user()->role == 'admin') {
+            return $next($request);
+        }
+
+        return redirect()->route("home");
+
+       
     }
 }

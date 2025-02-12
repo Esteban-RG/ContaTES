@@ -15,7 +15,7 @@ use App\Http\Controllers\ProfileController;
 
 Route::get('/', function () {
     return view('guest');
-});
+})->name('guest');
 
 
 
@@ -91,3 +91,12 @@ Route::middleware('guest')->group(function() {
 
 });
 
+
+
+Route::middleware(['auth','admin'])->group(function () {
+    Route::get('/admin', function () {
+        return view('admin.pane');
+    })->name('admin_pane');
+
+    
+});
