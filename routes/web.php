@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\AdminUsers;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Auth\ConfirmablePasswordController;
@@ -95,8 +96,15 @@ Route::middleware('guest')->group(function() {
 
 Route::middleware(['auth','admin'])->group(function () {
     Route::get('/admin', function () {
-        return view('admin.pane');
-    })->name('admin_pane');
+        return view('admin.dashboard');
+    })->name('dashboard');
+
+
+    Route::get('/admin/user', [AdminUsers::class, 'show'] )->name('admin-user');
+    Route::post('/admin/user',[AdminUsers::class, 'store' ])->name('admin-user-create');
+    Route::delete('/admin/user/{user}',[AdminUsers::class, 'destroy'])->name('admin-user-destroy');
+    Route::get('/admin/user/{user}/edit/',[AdminUsers::class, 'edit'])->name('admin-user-edit');
+    Route::put('/admin/user/{user}',[AdminUsers::class, 'update'])->name('admin-user-update');
 
     
 });

@@ -9,20 +9,10 @@
       <nav id="navmenu" class="navmenu">
         <ul>
             
-            <li><a href="https://www.teschi.edu.mx">Comunidad</a></li>
-            <li><a href="{{ url('/contact') }}" class="{{ Request::is('/contact') ? 'active' : '' }}">Atencion y Soporte</a></li>
+            <li><a href="{{ url('/') }}" class=" active">Inicio</a></li>
             
-            @if(Request::is('login'))
-                <li><a href="{{ url('/register') }}" class="active" >Registro</a></li>
-            @else
-                <li><a href="{{ url('/home') }}" class="active" >Acceso</a></li>
-            @endif
 
             @auth            
-            
-            @if( Auth::user()->role == 'admin'   )
-            <li><a href="{{ url('/admin') }}" class="{{ Request::is('/admin') ? 'active' : '' }}">Admin</a></li>
-            @endif
 
             <li> 
               <div class="dropdown">
