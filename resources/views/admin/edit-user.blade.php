@@ -38,12 +38,12 @@
                         
                         <div>
                             <x-input-label for="name" :value="__('Nombre')" />
-                            <x-text-input id="name" name="name" type="text" class="mt-1 block w-full" value="{{$user->name}}" required autofocus autocomplete="name" />
+                            <x-text-input id="name" name="name" type="text" class="mt-1 block w-full" value="{{$user->name}}" required autofocus="name" />
                         </div>
 
                         <div>
                             <x-input-label for="name" :value="__('Email')" />
-                            <x-text-input id="email" name="email" type="email" class="mt-1 block w-full" value="{{$user->email}}" required autofocus autocomplete="email" />
+                            <x-text-input id="email" name="email" type="email" class="mt-1 block w-full" value="{{$user->email}}" required autofocus="email" />
                         </div>
                         <div class="form-group mt-3">
                             <x-input-label for="password" :value="__('Nueva contraseña')" />

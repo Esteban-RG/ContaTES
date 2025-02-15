@@ -19,6 +19,12 @@
                     Usuarios
                 </a>
             </li>
+            <li>
+                <a href="{{ route ('admin-plaza')}}" class="nav-link text-white {{ Route::is('admin-plaza') ? 'active' : '' }}">
+                    <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#speedometer2"/></svg>
+                    Plazas
+                </a>
+            </li>
             
         </ul>
         <hr>

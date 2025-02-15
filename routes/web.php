@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\AdminUsers;
+use App\Http\Controllers\Admin\AdminPlazas;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Auth\ConfirmablePasswordController;
@@ -105,6 +106,12 @@ Route::middleware(['auth','admin'])->group(function () {
     Route::delete('/admin/user/{user}',[AdminUsers::class, 'destroy'])->name('admin-user-destroy');
     Route::get('/admin/user/{user}/edit/',[AdminUsers::class, 'edit'])->name('admin-user-edit');
     Route::put('/admin/user/{user}',[AdminUsers::class, 'update'])->name('admin-user-update');
+
+    Route::get('/admin/plaza', [AdminPlazas::class, 'show'] )->name('admin-plaza');
+    Route::post('/admin/plaza',[AdminPlazas::class, 'store' ])->name('admin-plaza-create');
+    Route::delete('/admin/plaza/{plaza}',[AdminPlazas::class, 'destroy'])->name('admin-plaza-destroy');
+    Route::get('/admin/plaza/{plaza}/edit/',[AdminPlazas::class, 'edit'])->name('admin-plaza-edit');
+    Route::put('/admin/plaza/{plaza}',[AdminPlazas::class, 'update'])->name('admin-plaza-update');
 
     
 });

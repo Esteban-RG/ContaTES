@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('plazas', function (Blueprint $table) {
             $table->id();
             $table->string('nombre', 100);
+            $table->float('sueldo');
             $table->timestamps();
         });
     }

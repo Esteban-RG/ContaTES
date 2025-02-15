@@ -12,5 +12,6 @@ class Plaza extends Model
     // Permitir asignación masiva
     protected $fillable = [
         'nombre',
+        'sueldo',
     ];
 }
