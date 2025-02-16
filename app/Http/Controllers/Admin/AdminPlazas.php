@@ -7,9 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\View\View;
 use App\Models\Plaza;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Auth\Events\Registered;
-use Illuminate\Validation\Rules;
-use Illuminate\Support\Facades\Hash;
+
 
 
 

@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\AdminUsers;
 use App\Http\Controllers\Admin\AdminPlazas;
+use App\Http\Controllers\Admin\AdminVacaciones;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Auth\ConfirmablePasswordController;
@@ -112,6 +113,12 @@ Route::middleware(['auth','admin'])->group(function () {
     Route::delete('/admin/plaza/{plaza}',[AdminPlazas::class, 'destroy'])->name('admin-plaza-destroy');
     Route::get('/admin/plaza/{plaza}/edit/',[AdminPlazas::class, 'edit'])->name('admin-plaza-edit');
     Route::put('/admin/plaza/{plaza}',[AdminPlazas::class, 'update'])->name('admin-plaza-update');
+
+    Route::get('/admin/vacaciones', [AdminVacaciones::class, 'show'] )->name('admin-vacaciones');
+    Route::post('/admin/vacaciones',[AdminVacaciones::class, 'store' ])->name('admin-vacaciones-create');
+    Route::delete('/admin/vacaciones/{vacaciones}',[AdminVacaciones::class, 'destroy'])->name('admin-vacaciones-destroy');
+    Route::get('/admin/vacaciones/{vacaciones}/edit/',[AdminVacaciones::class, 'edit'])->name('admin-vacaciones-edit');
+    Route::put('/admin/vacaciones/{vacaciones}',[AdminVacaciones::class, 'update'])->name('admin-vacaciones-update');
 
     
 });
