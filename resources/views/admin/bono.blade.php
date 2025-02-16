@@ -1,6 +1,6 @@
 <x-layout-admin title="Panel de administracion">
     <div class="m-3">
-        <h1>Administrar plazas</h1>
+        <h1>Administrar bonos</h1>
     </div>
     
     <div class="d-flex flex-row-reverse mb-3">
@@ -19,29 +19,28 @@
         </div>
     @endif
 
-    <x-input-error class="mt-2" :messages="$errors->get('nombre')" />
+    <x-input-error class="mt-2" :messages="$errors->get('descripcion')" />
 
-    <x-input-error class="mt-2" :messages="$errors->get('email')" />
+    <x-input-error class="mt-2" :messages="$errors->get('monto')" />
 
-    <x-input-error class="mt-2" :messages="$errors->get('password')" />
 
     <div class="new align-items-center " style="display:none;">
 
         <div class="card shadow-sm mb-4">
             <div class="card-body">
-                <form action="{{ route ('admin-plaza-create')}}" method="post">
+                <form action="{{ route ('admin-bono-create')}}" method="post">
                     @csrf
 
                     <div class=" mt-6 space-y-6 p-4 ">
                         
                         <div>
-                            <x-input-label for="nombre" :value="__('Nombre')" />
-                            <x-text-input id="nombre" name="nombre" type="text" class="mt-1 block w-full"  required autofocus />
+                            <x-input-label for="descripcion" :value="__('Descripción')" />
+                            <x-text-input id="descripcion" name="descripcion" type="text" class="mt-1 block w-full"  required autofocus />
                         </div>
 
                         <div>
-                            <x-input-label for="sueldo" :value="__('Sueldo')" />
-                            <x-text-input id="sueldo" name="sueldo" type="numeric" class="mt-1 block w-full"  required autofocus />
+                            <x-input-label for="monto" :value="__('Monto')" />
+                            <x-text-input id="monto" name="monto" type="numeric" class="mt-1 block w-full"  required autofocus />
                         </div>
 
                         
@@ -64,23 +63,23 @@
             <tr>
                 <th scope="col">Id</th>
                 <th scope="col">Nombre</th>
-                <th scope="col">Sueldo</th>
+                <th scope="col">Monto</th>
                 <th scope="col" colspan=2>Acciones</th>
             </tr>
         </thead>
         <tbody>
-            @foreach ($plazas as $plaza)
+            @foreach ($bonos as $bono)
                 <tr>
-                    <td>{{ $plaza->id }}</td>
-                    <td>{{ $plaza->nombre }}</td>
-                    <td>{{ $plaza->sueldo }}</td>
+                    <td>{{ $bono->id }}</td>
+                    <td>{{ $bono->descripcion }}</td>
+                    <td>{{ $bono->monto }}</td>
                     <td>                        
-                        <a href="{{ route('admin-plaza-edit',  $plaza->id) }}" class="btn btn-primary">Editar</a>
+                        <a href="{{ route('admin-bono-edit',  $bono->id) }}" class="btn btn-primary">Editar</a>
                     </td>
                     
                     <td>
                         
-                        <form action="{{ route('admin-plaza-destroy', $plaza->id) }}" method="POST" onsubmit="return confirm('¿Estás seguro de eliminar esta plaza?');">
+                        <form action="{{ route('admin-bono-destroy', $bono->id) }}" method="POST" onsubmit="return confirm('¿Estás seguro de eliminar esta bono?');">
                             @csrf
                             @method('DELETE')
                             <button class="btn btn-danger">Eliminar</button>

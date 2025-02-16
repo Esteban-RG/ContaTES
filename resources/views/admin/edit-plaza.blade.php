@@ -1,6 +1,6 @@
-<x-layout-admin title="Panel de administracion de usuarios">
+<x-layout-admin title="Panel de administracion">
     <div class="m-3">
-        <h1>Administrar Usuarios</h1>
+        <h1>Administrar plaza</h1>
     </div>
     
     <div class="d-flex  mb-3">
@@ -19,11 +19,9 @@
         </div>
     @endif
 
-    <x-input-error class="mt-2" :messages="$errors->get('nombre')" />
+    <x-input-error class="mt-2" :messages="$errors->get('descripcion')" />
 
-    <x-input-error class="mt-2" :messages="$errors->get('email')" />
-
-    <x-input-error class="mt-2" :messages="$errors->get('password')" />
+    <x-input-error class="mt-2" :messages="$errors->get('monto')" />
 
 
     <div class="new align-items-center ">

@@ -23,4 +23,9 @@ class Empleado extends Model
     {
         return $this->belongsTo(Persona::class, 'persona_id', 'id');
     }
+
+    public function bonos()
+    {
+        return $this->belongsToMany(Bono::class)->withTimestamps();
+    }
 }

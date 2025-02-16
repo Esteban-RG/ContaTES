@@ -1,6 +1,6 @@
-<x-layout-admin title="Panel de administracion de usuarios">
+<x-layout-admin title="Panel de administracion">
     <div class="m-3">
-        <h1>Administrar Usuarios</h1>
+        <h1>Administrar usuarios</h1>
     </div>
     
     <div class="d-flex flex-row-reverse mb-3">

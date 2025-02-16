@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\AdminUsers;
 use App\Http\Controllers\Admin\AdminPlazas;
 use App\Http\Controllers\Admin\AdminVacaciones;
+use App\Http\Controllers\Admin\AdminBonos;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Auth\ConfirmablePasswordController;
@@ -119,6 +120,12 @@ Route::middleware(['auth','admin'])->group(function () {
     Route::delete('/admin/vacaciones/{vacaciones}',[AdminVacaciones::class, 'destroy'])->name('admin-vacaciones-destroy');
     Route::get('/admin/vacaciones/{vacaciones}/edit/',[AdminVacaciones::class, 'edit'])->name('admin-vacaciones-edit');
     Route::put('/admin/vacaciones/{vacaciones}',[AdminVacaciones::class, 'update'])->name('admin-vacaciones-update');
+
+    Route::get('/admin/bono', [AdminBonos::class, 'show'] )->name('admin-bono');
+    Route::post('/admin/bono',[AdminBonos::class, 'store' ])->name('admin-bono-create');
+    Route::delete('/admin/bono/{bono}',[AdminBonos::class, 'destroy'])->name('admin-bono-destroy');
+    Route::get('/admin/bono/{bono}/edit/',[AdminBonos::class, 'edit'])->name('admin-bono-edit');
+    Route::put('/admin/bono/{bono}',[AdminBonos::class, 'update'])->name('admin-bono-update');
 
     
 });
