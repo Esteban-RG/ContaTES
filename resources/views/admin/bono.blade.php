@@ -40,7 +40,7 @@
 
                         <div>
                             <x-input-label for="monto" :value="__('Monto')" />
-                            <x-text-input id="monto" name="monto" type="numeric" class="mt-1 block w-full"  required autofocus />
+                            <x-text-input id="monto" name="monto" type="number" class="mt-1 block w-full"  required autofocus />
                         </div>
 
                         

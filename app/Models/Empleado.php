@@ -11,6 +11,7 @@ class Empleado extends Model
 
     // Permitir asignación masiva
     protected $fillable = [
+        'matricula',
         'fecha_ingreso',
         'plaza_id',
         'curp',
@@ -27,5 +28,10 @@ class Empleado extends Model
     public function bonos()
     {
         return $this->belongsToMany(Bono::class)->withTimestamps();
+    }
+
+    public function plaza()
+    {
+        return $this->belongsTo(Plaza::class);
     }
 }

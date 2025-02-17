@@ -13,11 +13,12 @@ return new class extends Migration
     {
         Schema::create('empleados', function (Blueprint $table) {
             $table->id();
+            $table->bigInteger('matricula')->unique();
             $table->date('fecha_ingreso');
             $table->unsignedBigInteger('plaza_id');
-            $table->string('curp'); 
-            $table->string('rfc'); 
-            $table->string('nss'); 
+            $table->string('curp')->unique()->nullable(); 
+            $table->string('rfc')->unique()->nullable(); 
+            $table->string('nss')->unique()->nullable(); 
             $table->unsignedBigInteger('persona_id'); 
             $table->timestamps(); 
 

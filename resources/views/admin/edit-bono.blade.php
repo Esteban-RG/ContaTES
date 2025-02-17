@@ -33,9 +33,6 @@
                     @method('PUT')
 
                     <div class=" mt-6 space-y-6 p-4 ">
-                    
-
-                        
 
                         <div>
                             <x-input-label for="descripcion" :value="__('Descripción')" />
@@ -44,13 +41,11 @@
 
                         <div>
                             <x-input-label for="monto" :value="__('Monto')" />
-                            <x-text-input id="monto" name="monto" type="numeric" class="mt-1 block w-full" value="{{$bono->monto}}" required autofocus />
+                            <x-text-input id="monto" name="monto" type="number" class="mt-1 block w-full" value="{{$bono->monto}}" required autofocus />
                         </div>
                                             
                         <div class="text-center mt-3"><button class="btn btn-success w-100" type="submit">Guardar</button></div>
-                        
-
-                        
+    
 
                     </div>
                 </form>

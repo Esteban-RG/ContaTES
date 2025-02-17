@@ -14,4 +14,9 @@ class Plaza extends Model
         'nombre',
         'sueldo',
     ];
+
+    public function empleado()
+    {
+        return $this->hasMany(Empleado::class);
+    }
 }

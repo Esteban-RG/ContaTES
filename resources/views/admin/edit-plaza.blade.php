@@ -41,7 +41,7 @@
 
                         <div>
                             <x-input-label for="sueldo" :value="__('Sueldo')" />
-                            <x-text-input id="sueldo" name="sueldo" type="numeric" class="mt-1 block w-full"  value="{{$plaza->sueldo}}" required autofocus />
+                            <x-text-input id="sueldo" name="sueldo" type="number" class="mt-1 block w-full"  value="{{$plaza->sueldo}}" required autofocus />
                         </div>
                                             
                         <div class="text-center mt-3"><button class="btn btn-success w-100" type="submit">Guardar</button></div>

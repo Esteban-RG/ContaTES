@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\AdminUsers;
 use App\Http\Controllers\Admin\AdminPlazas;
 use App\Http\Controllers\Admin\AdminVacaciones;
 use App\Http\Controllers\Admin\AdminBonos;
+use App\Http\Controllers\Admin\AdminEmpleados;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Auth\ConfirmablePasswordController;
@@ -126,6 +127,13 @@ Route::middleware(['auth','admin'])->group(function () {
     Route::delete('/admin/bono/{bono}',[AdminBonos::class, 'destroy'])->name('admin-bono-destroy');
     Route::get('/admin/bono/{bono}/edit/',[AdminBonos::class, 'edit'])->name('admin-bono-edit');
     Route::put('/admin/bono/{bono}',[AdminBonos::class, 'update'])->name('admin-bono-update');
+
+    Route::get('/admin/empleado', [AdminEmpleados::class, 'show'] )->name('admin-empleado');
+    Route::post('/admin/empleado',[AdminEmpleados::class, 'store' ])->name('admin-empleado-create');
+    Route::delete('/admin/empleado/{empleado}',[AdminEmpleados::class, 'destroy'])->name('admin-empleado-destroy');
+    Route::get('/admin/empleado/{empleado}/edit/',[AdminEmpleados::class, 'edit'])->name('admin-empleado-edit');
+    Route::get('/admin/empleado/{empleado}',[AdminEmpleados::class, 'details'])->name('admin-empleado-details');
+    Route::put('/admin/empleado/{empleado}',[AdminEmpleados::class, 'update'])->name('admin-empleado-update');
 
     
 });

@@ -20,6 +20,12 @@
                 </a>
             </li>
             <li>
+                <a href="{{ route ('admin-empleado')}}" class="nav-link text-white {{ Route::is('admin-empleado') ? 'active' : '' }}">
+                    <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#speedometer2"/></svg>
+                    Empleados
+                </a>
+            </li>
+            <li>
                 <a href="{{ route ('admin-plaza')}}" class="nav-link text-white {{ Route::is('admin-plaza') ? 'active' : '' }}">
                     <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#speedometer2"/></svg>
                     Plazas

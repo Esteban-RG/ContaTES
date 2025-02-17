@@ -13,11 +13,11 @@ return new class extends Migration
     {
         Schema::create('personas', function (Blueprint $table) {
             $table->id();
-            $table->string('nombre', 100);
-            $table->string('ap_paterno', 100);
+            $table->string('nombre', 100)->nullable();
+            $table->string('ap_paterno', 100)->nullable();
             $table->string('ap_materno', 100)->nullable();
             $table->string('telefono', 20)->nullable();
-            $table->enum('genero', ['M','F']);
+            $table->enum('genero', ['M','F'])->nullable();
             $table->unsignedBigInteger('user_id')->unique(); // Relación 1:1
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();

@@ -13,11 +13,11 @@ return new class extends Migration
     {
         Schema::create('empleado_has_bonos', function (Blueprint $table) {
             $table->unsignedBigInteger('bono_id');
-            $table->unsignedBigInteger('persona_id');
+            $table->unsignedBigInteger('empleado_id');
             $table->timestamps();
 
             $table->foreign('bono_id')->references('id')->on('bonos')->onDelete('cascade');
-            $table->foreign('persona_id')->references('persona_id')->on('empleados')->onDelete('cascade');
+            $table->foreign('empleado_id')->references('id')->on('empleados')->onDelete('cascade');
         });
     }
 

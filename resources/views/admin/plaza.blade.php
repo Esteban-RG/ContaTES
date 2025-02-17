@@ -41,7 +41,7 @@
 
                         <div>
                             <x-input-label for="sueldo" :value="__('Sueldo')" />
-                            <x-text-input id="sueldo" name="sueldo" type="numeric" class="mt-1 block w-full"  required autofocus />
+                            <x-text-input id="sueldo" name="sueldo" type="number" class="mt-1 block w-full"  required autofocus />
                         </div>
 
                         
