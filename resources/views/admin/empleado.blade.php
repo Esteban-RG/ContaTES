@@ -50,7 +50,7 @@
                         <div>
                             <label for="dynamicCombobox" class="form-label">Selecciona plaza</label>
                             <select class="form-select" id="plaza_id" name="plaza_id">
-                                <option selected>Selecciona usuario</option>
+                                <option selected>Selecciona plaza</option>
                                 @foreach($plazas as $plaza)
                                     <option value="{{ $plaza->id }}">{{ $plaza->nombre }}</option>
                                 @endforeach

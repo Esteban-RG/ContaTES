@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\AdminPlazas;
 use App\Http\Controllers\Admin\AdminVacaciones;
 use App\Http\Controllers\Admin\AdminBonos;
 use App\Http\Controllers\Admin\AdminEmpleados;
+use App\Http\Controllers\Admin\BonoEmpleadoController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Auth\ConfirmablePasswordController;
@@ -135,5 +136,8 @@ Route::middleware(['auth','admin'])->group(function () {
     Route::get('/admin/empleado/{empleado}',[AdminEmpleados::class, 'details'])->name('admin-empleado-details');
     Route::put('/admin/empleado/{empleado}',[AdminEmpleados::class, 'update'])->name('admin-empleado-update');
 
-    
+    Route::get('admin/empleado/{empleado}/bonos', [BonoEmpleadoController::class, 'getBonos'])->name('empleado-get-bono');
+    Route::post('admin/empleado/{empleado}/bonos', [BonoEmpleadoController::class, 'assignBono'])->name('empleado-assign-bono');
+    Route::delete('admin/empleado/{empleado}/bonos/{bono}', [BonoEmpleadoController::class, 'removeBono'])->name('empleado-remove-bono');
+
 });

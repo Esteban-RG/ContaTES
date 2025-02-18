@@ -44,6 +44,54 @@
                     </div>
                 </div>
             </div>
+
+            <div>
+                <h2 class="h4 text-primary mb-3"> Bonos asignados</h2>
+                
+                <form action="{{ route('empleado-assign-bono', $empleado->id)}}" method="POST">
+                    @csrf
+                    <div class="row align-items-center"> 
+                        <div class="col-10">
+                            <label for="dynamicCombobox" class="form-label">Selecciona bono</label>
+                            <select class="form-select" id="bono_id" name="bono_id">
+                                <option selected>Selecciona bono</option>
+                                @foreach($bonos_disponibles as $bono)
+                                    <option value="{{ $bono->id }}">{{ $bono->descripcion }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="col-2 d-flex align-items-end"> 
+                            <button class="btn btn-success mt-4">Asignar</button>
+                        </div>
+                    </div>
+                </form>
+
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">Bono</th>
+                            <th scope="col" >Accion</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($empleado->bonos as $bono) 
+                            <tr>
+                                <td>{{ $bono->descripcion }}</td>
+                                
+                                
+                                <td>
+                                    
+                                    <form action="{{ route('empleado-remove-bono', [$empleado->id , $bono->id]) }}" method="POST" onsubmit="return confirm('¿Estás seguro de eliminar este bono?');">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button class="btn btn-danger">Eliminar</button>
+                                    </form>
+                                </td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
     
             
         </div>

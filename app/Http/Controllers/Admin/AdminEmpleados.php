@@ -9,11 +9,8 @@ use App\Models\Empleado;
 use App\Models\User;
 use App\Models\Plaza;
 use App\Models\Persona;
+use App\Models\Bono;
 use Illuminate\Http\RedirectResponse;
-use Exception;
-use Illuminate\Database\QueryException;
-use Illuminate\Validation\ValidationException;
-
 
 
 
@@ -73,7 +70,11 @@ class AdminEmpleados extends Controller
 
     public function details(Empleado $empleado): View
     {
-        return view('admin.details-empleado', compact('empleado'));
+        $empleado_bonos = $empleado->bonos;
+        $bonos_asignados_ids = $empleado_bonos->pluck('id')->toArray();
+
+        $bonos_disponibles = Bono::whereNotIn('id', $bonos_asignados_ids)->get();
+        return view('admin.details-empleado', compact(['empleado', 'empleado_bonos','bonos_disponibles']));
     }
 
 
