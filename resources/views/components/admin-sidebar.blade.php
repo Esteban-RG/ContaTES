@@ -1,9 +1,8 @@
 <div>
     <!-- Sidebar -->
-    <div class="d-flex flex-column flex-shrink-0 p-3 text-bg-dark sidebar h-100" style="width: 250px;">
-        <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
-            <svg class="bi pe-none me-2" width="40" height="32"><use xlink:href="#bootstrap"/></svg>
-            <span class="fs-4">ContaTES</span>
+    <div class="d-flex flex-column flex-shrink-0 p-3 text-bg-dark sidebar h-100">
+        <a href="/" class="logo d-flex align-items-center" >
+            <img src="{{ asset('img/logo.png') }}" alt="" style="max-height: 70px; margin-right: 8px;">
         </a>
         <hr>
         <ul class="nav nav-pills flex-column mb-auto">
