@@ -27,6 +27,6 @@ class Persona extends Model
 
     public function empleado()
     {
-        return $this->hasMany(Empleado::class, 'persona_id', 'id');
+        return $this->hasOne(Empleado::class, 'persona_id', 'id');
     }
 }

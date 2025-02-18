@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\ProfileUpdateRequest;
 use App\Http\Requests\PersonalUpdateRequest;
 use App\Models\Persona;
+use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -19,10 +20,13 @@ class ProfileController extends Controller
      */
     public function edit(Request $request): View
     {
-        return view('profile.edit', [
-            'user' => $request->user(),
-            'persona' => Persona::where('user_id', $request->user()->id)->first()
-        ]);
+        $user = User::with(['persona.empleado.plaza'])->find($request->user()->id);
+
+        if (!$user) {
+            abort(404, 'Usuario no encontrado');
+        }
+
+        return view('profile.edit', compact('user'));
     }
 
     /**
@@ -33,7 +37,7 @@ class ProfileController extends Controller
         $table = $request->input('table');
 
         if ($table == 'user') {
-            // Actualiza los datos del usuario
+
             $request->user()->fill($request->validated());
 
             if ($request->user()->isDirty('email')) {
@@ -43,15 +47,23 @@ class ProfileController extends Controller
             $request->user()->save();
         } elseif ($table == 'personal') {
             
-            // Buscar o crear la persona asociada al usuario
             $persona = Persona::firstOrNew(['user_id' => $request->user()->id]);
             
-            // Validar con PersonaUpdateRequest
             $validatedData = $request->validated();
 
-            // Llenar y guardar la persona
             $persona->fill($validatedData);
             $persona->save();
+
+        } elseif($table == 'laboral'){
+
+            $empleado = $request->user()->persona->empleado;
+
+            // Guardar archivos
+            $this->guardarArchivos($request, $empleado);
+            $empleado->save();
+
+
+
         }
 
         return Redirect::route('profile.edit')->with('status', 'profile-updated');
@@ -77,5 +89,18 @@ class ProfileController extends Controller
         $request->session()->regenerateToken();
 
         return Redirect::to('/');
+    }
+
+
+    private function guardarArchivos($request, $empleado): void
+    {
+        $campos = ['curp', 'rfc', 'nss'];
+
+        foreach ($campos as $campo) {
+            if ($request->hasFile($campo)) {
+                $path = $request->file($campo)->store("pdfs/$campo", 'public');
+                $empleado->$campo = $path;
+            }
+        }
     }
 }

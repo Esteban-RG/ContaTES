@@ -38,9 +38,15 @@
                         <p class="mb-2"><strong>Fecha de Ingreso:</strong> {{ $empleado->fecha_ingreso }}</p>
                     </div>
                     <div class="col-md-6">
-                        <p class="mb-2"><strong>CURP:</strong> <a href="{{ $empleado->curp }}" class="text-decoration-none">Ver CURP</a></p>
-                        <p class="mb-2"><strong>RFC:</strong> <a href="{{ $empleado->rfc }}" class="text-decoration-none">Ver RFC</a></p>
-                        <p class="mb-2"><strong>NSS:</strong> <a href="{{ $empleado->nss }}" class="text-decoration-none">Ver NSS</a></p>
+                        @if($empleado->curp != null)
+                        <p class="mb-2"><strong>CURP:</strong> <a href="{{ asset('storage/'.$empleado->curp) }}" class="text-decoration-none">Ver CURP</a></p>
+                        @endif
+                        @if($empleado->nss != null)
+                        <p class="mb-2"><strong>NSS:</strong> <a href="{{ asset('storage/'.$empleado->nss) }}" class="text-decoration-none">Ver NSS</a></p>
+                        @endif
+                        @if($empleado->rfc != null)
+                        <p class="mb-2"><strong>RFC:</strong> <a href="{{ asset('storage/'.$empleado->rfc) }}" class="text-decoration-none">Ver RFC</a></p>
+                        @endif
                     </div>
                 </div>
             </div>
