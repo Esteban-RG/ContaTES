@@ -83,9 +83,8 @@
     </p>
     <h2>Al utilizar este sitio, usted acepta cumplir con estos Términos y Condiciones.</h2>
 
-    <a href="index.html" class="logo d-flex align-items-center justify-content-center my-5">
-        <img src="assets/img/logo.png" alt="">
-        <h1 class="sitename">ContaTES</h1>
+    <a href="{{ url ('/') }}" class="logo d-flex align-items-center justify-content-center my-5" >
+        <img src="{{ asset('img/logo.png') }}" alt="">
     </a>
     </div>
     

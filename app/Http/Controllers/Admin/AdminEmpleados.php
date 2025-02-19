@@ -99,6 +99,13 @@ class AdminEmpleados extends Controller
         // Redireccionar con un mensaje de éxito
         return redirect()->route('admin-empleado')->with('success', 'Empleado actualizado correctamente.');
 
-    
+        
+    }
+
+    public function showNominas(Request $request, Empleado $empleado): View
+    {
+        $nominas = $empleado->nominas;
+
+        return view('admin.empleado-historial', compact(['nominas', 'empleado']));
     }
 }

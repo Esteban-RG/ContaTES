@@ -39,20 +39,22 @@
                     </div>
                     <div class="col-md-6">
                         @if($empleado->curp != null)
-                        <p class="mb-2"><strong>CURP:</strong> <a href="{{ asset('storage/'.$empleado->curp) }}" class="text-decoration-none">Ver CURP</a></p>
+                        <p class="mb-2"><strong>CURP:</strong> <a href="{{ asset('storage/'.$empleado->curp) }}" class="text-decoration-none" target="_blank">Ver CURP</a></p>
                         @endif
                         @if($empleado->nss != null)
-                        <p class="mb-2"><strong>NSS:</strong> <a href="{{ asset('storage/'.$empleado->nss) }}" class="text-decoration-none">Ver NSS</a></p>
+                        <p class="mb-2"><strong>NSS:</strong> <a href="{{ asset('storage/'.$empleado->nss) }}" class="text-decoration-none" target="_blank">Ver NSS</a></p>
                         @endif
                         @if($empleado->rfc != null)
-                        <p class="mb-2"><strong>RFC:</strong> <a href="{{ asset('storage/'.$empleado->rfc) }}" class="text-decoration-none">Ver RFC</a></p>
+                        <p class="mb-2"><strong>RFC:</strong> <a href="{{ asset('storage/'.$empleado->rfc) }}" class="text-decoration-none" target="_blank">Ver RFC</a></p>
                         @endif
                     </div>
                 </div>
             </div>
 
+            <a href="{{ route('empleado-show-nomina',$empleado->id) }}" class="btn btn-success"> Historial de nomina </a>
+
             <div>
-                <h2 class="h4 text-primary mb-3"> Bonos asignados</h2>
+                <h2 class="h4 text-primary mb-3 mt-3"> Bonos asignados</h2>
                 
                 <form action="{{ route('empleado-assign-bono', $empleado->id)}}" method="POST">
                     @csrf
@@ -71,6 +73,8 @@
                         </div>
                     </div>
                 </form>
+
+                
 
                 <table class="table">
                     <thead>

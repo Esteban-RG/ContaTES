@@ -34,4 +34,9 @@ class Empleado extends Model
     {
         return $this->belongsTo(Plaza::class);
     }
+
+    public function nominas()
+    {
+        return $this->hasMany(Nomina::class);
+    }
 }

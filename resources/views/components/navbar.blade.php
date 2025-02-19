@@ -19,9 +19,7 @@
 
             @auth            
             
-            @if( Auth::user()->role == 'admin'   )
-            <li><a href="{{ url('/admin') }}" class="{{ Request::is('/admin') ? 'active' : '' }}">Administrar</a></li>
-            @endif
+            
             <li>
               <a href="{{ route('profile.edit')}}" class="link">{{ Auth::user()->name }}</a>
             </li>

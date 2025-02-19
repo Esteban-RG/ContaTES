@@ -15,7 +15,7 @@ class Plaza extends Model
         'sueldo',
     ];
 
-    public function empleado()
+    public function empleados()
     {
         return $this->hasMany(Empleado::class);
     }

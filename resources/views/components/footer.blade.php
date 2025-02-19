@@ -9,7 +9,7 @@
             </p>
           </div>
         </div>
-        <div class="col-md-6 col-lg-3 ps-lg-5 mb-3 mb-md-0">
+        {{-- <div class="col-md-6 col-lg-3 ps-lg-5 mb-3 mb-md-0">
           <div class="widget">
             <h3 class="widget-heading">ContaTES</h3>
             <ul class="list-unstyled float-start me-5">
@@ -58,7 +58,7 @@
                 <a href="#"><span class="bi bi-google-play"></span></a>
               </li>
             </ul>
-          </div>
+          </div> --}}
 
           
         </div>

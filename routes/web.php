@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\AdminVacaciones;
 use App\Http\Controllers\Admin\AdminBonos;
 use App\Http\Controllers\Admin\AdminEmpleados;
 use App\Http\Controllers\Admin\BonoEmpleadoController;
+use App\Http\Controllers\NominaController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Auth\ConfirmablePasswordController;
@@ -27,11 +28,11 @@ Route::get('/', function () {
 
 Route::get('/contact', function () {
     return view('contact');
-});
+})->name('contact');
 
 Route::get('/terms', function () {
     return view('terminos');
-});
+})->name('terminos');
 
 Route::get('/forgot', function () {
     return view('auth.forgot-password');
@@ -44,7 +45,7 @@ Route::get('/forgot', function () {
 Route::middleware('auth')->group(function () {
     Route::get('/home', function () {
         return view('home');
-    })->name('home');
+    })->name('home')->middleware('isAdmin');
 
     Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])
     ->name('logout');
@@ -70,6 +71,11 @@ Route::middleware('auth')->group(function () {
     Route::post('confirm-password', [ConfirmablePasswordController::class, 'store']);
 
     Route::put('password', [PasswordController::class, 'update'])->name('password.update');
+
+    Route::get('/nomina', [NominaController::class, 'show'])->name('show_nomina');
+    Route::get('/nomina/{nomina}', [NominaController::class, 'details'])->name('details-nomina');
+    Route::get('/nomina/pdf/{id}', [NominaController::class, 'descargarPDF'])->name('nomina-pdf');
+
 });
 
 Route::middleware('guest')->group(function() {
@@ -135,6 +141,8 @@ Route::middleware(['auth','admin'])->group(function () {
     Route::get('/admin/empleado/{empleado}/edit/',[AdminEmpleados::class, 'edit'])->name('admin-empleado-edit');
     Route::get('/admin/empleado/{empleado}',[AdminEmpleados::class, 'details'])->name('admin-empleado-details');
     Route::put('/admin/empleado/{empleado}',[AdminEmpleados::class, 'update'])->name('admin-empleado-update');
+
+    Route::get('/admin/empleado/{empleado}/nomina',[AdminEmpleados::class, 'showNominas'])->name('empleado-show-nomina');
 
     Route::get('admin/empleado/{empleado}/bonos', [BonoEmpleadoController::class, 'getBonos'])->name('empleado-get-bono');
     Route::post('admin/empleado/{empleado}/bonos', [BonoEmpleadoController::class, 'assignBono'])->name('empleado-assign-bono');
