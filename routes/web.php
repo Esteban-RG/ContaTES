@@ -5,7 +5,9 @@ use App\Http\Controllers\Admin\AdminPlazas;
 use App\Http\Controllers\Admin\AdminVacaciones;
 use App\Http\Controllers\Admin\AdminBonos;
 use App\Http\Controllers\Admin\AdminEmpleados;
+use App\Http\Controllers\Admin\AdminDeducciones;
 use App\Http\Controllers\Admin\BonoEmpleadoController;
+use App\Http\Controllers\Admin\AdminTarifas;
 use App\Http\Controllers\NominaController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
@@ -147,5 +149,16 @@ Route::middleware(['auth','admin'])->group(function () {
     Route::get('admin/empleado/{empleado}/bonos', [BonoEmpleadoController::class, 'getBonos'])->name('empleado-get-bono');
     Route::post('admin/empleado/{empleado}/bonos', [BonoEmpleadoController::class, 'assignBono'])->name('empleado-assign-bono');
     Route::delete('admin/empleado/{empleado}/bonos/{bono}', [BonoEmpleadoController::class, 'removeBono'])->name('empleado-remove-bono');
+
+
+    Route::get('/admin/deduccion', [AdminDeducciones::class, 'show'] )->name('admin-deduccion');
+    Route::post('/admin/deduccion',[AdminDeducciones::class, 'store' ])->name('admin-deduccion-create');
+    Route::delete('/admin/deduccion/{deduccion}',[AdminDeducciones::class, 'destroy'])->name('admin-deduccion-destroy');
+    Route::get('/admin/deduccion/{deduccion}/edit/',[AdminDeducciones::class, 'edit'])->name('admin-deduccion-edit');
+    Route::put('/admin/deduccion/{deduccion}',[AdminDeducciones::class, 'update'])->name('admin-deduccion-update');
+
+    Route::get('/admin/tarifa/{isr}/edit/',[AdminTarifas::class, 'edit'])->name('admin-tarifa-edit');
+    Route::put('/admin/tarifa/{isr}',[AdminTarifas::class, 'update'])->name('admin-tarifa-update');
+
 
 });

@@ -25,6 +25,12 @@
                 </a>
             </li>
             <li>
+                <a href="{{ route ('admin-deduccion')}}" class="nav-link text-white {{ Route::is('admin-deduccion') ? 'active' : '' }}">
+                    <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#speedometer2"/></svg>
+                    Deducciones
+                </a>
+            </li>
+            <li>
                 <a href="{{ route ('admin-vacaciones')}}" class="nav-link text-white {{ Route::is('admin-vacaciones') ? 'active' : '' }}">
                     <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#speedometer2"/></svg>
                     Vacaciones
