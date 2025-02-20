@@ -46,7 +46,7 @@
   
               <div class="row mt-5" >
                 <div class="col-4 col-sm-4 col-md-4 col-lg-4">
-                  <a href="">
+                  <a href="{{ route('show_licencia') }}">
                     <div class="services-item" data-aos="fade-up" data-aos-delay="300">
                       <div class="services-icon">
                         <i class="bi bi-globe"></i>

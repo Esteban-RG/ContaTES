@@ -9,6 +9,8 @@ use App\Http\Controllers\Admin\AdminDeducciones;
 use App\Http\Controllers\Admin\BonoEmpleadoController;
 use App\Http\Controllers\Admin\AdminTarifas;
 use App\Http\Controllers\NominaController;
+use App\Http\Controllers\LicenciaController;
+use App\Http\Controllers\PermisoController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Auth\ConfirmablePasswordController;
@@ -77,6 +79,13 @@ Route::middleware('auth')->group(function () {
     Route::get('/nomina', [NominaController::class, 'show'])->name('show_nomina');
     Route::get('/nomina/{nomina}', [NominaController::class, 'details'])->name('details-nomina');
     Route::get('/nomina/pdf/{id}', [NominaController::class, 'descargarPDF'])->name('nomina-pdf');
+
+    Route::get('/licencia', [LicenciaController::class, 'show'])->name('show_licencia');
+
+    Route::get('/permiso', [PermisoController::class, 'show'])->name('show-permiso');
+    Route::post('/permiso', [PermisoController::class, 'store'])->name('store-permiso');
+
+
 
 });
 

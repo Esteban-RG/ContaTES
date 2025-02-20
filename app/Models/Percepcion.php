@@ -13,6 +13,7 @@ class Percepcion extends Model
     protected $fillable = [
         'nombre',
         'valor',
+        'nomina_id',
     ];
 
     public function nomina()

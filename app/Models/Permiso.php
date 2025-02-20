@@ -4,19 +4,20 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Deduccion extends Model
+class Permiso extends Model
 {
-    protected $table = 'deducciones';
+    protected $table = 'permisos';
 
 
     // Permitir asignación masiva
     protected $fillable = [
-        'nombre',
-        'valor',
-        'nomina_id',
+        'descripcion',
+        'fecha',
+        'estado',
+        'empleado_id',
     ];
 
-    public function nomina()
+    public function empleado()
     {
         return $this->belongsTo(Nomina::class)->withTimestamps();
     }

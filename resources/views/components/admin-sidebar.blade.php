@@ -31,18 +31,17 @@
                 </a>
             </li>
             <li>
-                <a href="{{ route ('admin-vacaciones')}}" class="nav-link text-white {{ Route::is('admin-vacaciones') ? 'active' : '' }}">
-                    <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#speedometer2"/></svg>
-                    Vacaciones
-                </a>
-            </li>
-            <li>
                 <a href="{{ route ('admin-bono')}}" class="nav-link text-white {{ Route::is('admin-bono') ? 'active' : '' }}">
                     <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#speedometer2"/></svg>
                     Bonos
                 </a>
             </li>
-            
+            <li>
+                <a href="{{ route ('admin-vacaciones')}}" class="nav-link text-white {{ Route::is('admin-vacaciones') ? 'active' : '' }}">
+                    <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#speedometer2"/></svg>
+                    Vacaciones
+                </a>
+            </li>
         </ul>
         <hr>
         <div class="dropdown">
