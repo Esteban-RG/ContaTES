@@ -5,8 +5,14 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 use App\Models\User;
+use App\Models\Empleado;
 use App\Models\Nomina;
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 use Barryvdh\DomPDF\Facade\Pdf ;
+use PhpOffice\PhpSpreadsheet\Style\Fill;
+use PhpOffice\PhpSpreadsheet\Style\Font;
+use PhpOffice\PhpSpreadsheet\Style\Alignment;
 
 
 
@@ -39,5 +45,97 @@ class NominaController extends Controller
         $pdf = Pdf::loadView('pdf.nomina', compact('nomina'));
         
         return $pdf->download('nomina_'.$id.'.pdf'); // Descargar el archivo PDF
+    }
+
+    public function export($matricula)
+    {
+        $empleado = Empleado::where('matricula', $matricula)->first();
+    
+        if (!$empleado) {
+            return redirect()->back()->with('error', 'Empleado no encontrado');
+        }
+    
+        $nominas = $empleado->nominas;
+    
+        $spreadsheet = new Spreadsheet();
+        $sheet = $spreadsheet->getActiveSheet();
+    
+        $sheet->setCellValue('A1', 'Folio');
+        $sheet->setCellValue('B1', 'Fecha inicio');
+        $sheet->setCellValue('C1', 'Fecha final');
+        $sheet->setCellValue('D1', 'Matricula');
+        $sheet->setCellValue('E1', 'Nombre empleado');
+        $sheet->setCellValue('F1', 'Plaza');
+        $sheet->setCellValue('G1', 'Sueldo quincenal');
+        $sheet->setCellValue('H1', 'Total percepciones');
+        $sheet->setCellValue('I1', 'Total deducciones');
+        $sheet->setCellValue('J1', 'Salario bruto');
+        $sheet->setCellValue('K1', 'Salario neto');
+
+        // Crear un estilo para el encabezado
+        $headerStyle = [
+            'font' => [
+                'bold' => true, // Texto en negrita
+                'color' => ['rgb' => 'FFFFFF'], // Color de la letra (blanco)
+            ],
+            'fill' => [
+                'fillType' => Fill::FILL_SOLID, // Relleno sólido
+                'startColor' => ['rgb' => '069a2e'], // Color de fondo (azul)
+            ],
+            'alignment' => [
+                'horizontal' => Alignment::HORIZONTAL_CENTER, // Alinear texto al centro
+                'vertical' => Alignment::VERTICAL_CENTER, // Alinear texto verticalmente al centro
+            ],
+        ];
+
+        // Aplicar el estilo a las celdas del encabezado
+        $sheet->getStyle('A1:K1')->applyFromArray($headerStyle);
+    
+        $row = 2;
+        foreach ($nominas as $nomina) {
+
+            $sheet->setCellValue('A' . $row, $nomina->id);
+            $sheet->setCellValue('B' . $row, $nomina->fecha_inicio);
+            $sheet->setCellValue('C' . $row, $nomina->fecha_fin);
+            $sheet->setCellValue('D' . $row, $empleado->matricula);
+    
+            $nombreEmpleado = $empleado->persona
+                ? $empleado->persona->nombre . ' ' . $empleado->persona->ap_paterno . ' ' . $empleado->persona->ap_materno
+                : 'N/A';
+            $sheet->setCellValue('E' . $row, $nombreEmpleado);
+    
+            $plazaNombre = $empleado->plaza ? $empleado->plaza->nombre : 'N/A';
+            $sheet->setCellValue('F' . $row, $plazaNombre);
+    
+            $sueldoQuincenal = $empleado->plaza ? $empleado->plaza->sueldo : 'N/A';
+            $sheet->setCellValue('G' . $row, $sueldoQuincenal);
+    
+            $totalPercepciones = 0;
+            $totalDeducciones = 0;
+
+            foreach ($nomina->percepciones as $percepcion) {
+                $totalPercepciones += $percepcion->valor;
+            }
+
+            foreach ($nomina->deducciones as $deduccion) {
+                $totalDeducciones += $deduccion->valor;
+            }
+
+            $sheet->setCellValue('H' . $row, $totalPercepciones);
+            $sheet->setCellValue('I' . $row, $totalDeducciones);
+            $sheet->setCellValue('J' . $row, $nomina->salario_bruto);
+            $sheet->setCellValue('K' . $row, $nomina->salario_neto);
+    
+            $row++;
+        }
+    
+        $writer = new Xlsx($spreadsheet);
+    
+        $fileName = 'nomina_' . $matricula . '.xlsx';
+    
+        header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+        header('Content-Disposition: attachment; filename="' . $fileName . '"');
+        $writer->save('php://output');
+        exit;
     }
 }

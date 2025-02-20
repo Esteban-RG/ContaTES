@@ -10,6 +10,10 @@
                 <div class="d-flex  mb-3">
                     <a href="{{route ('admin-empleado-details',$empleado->id)}}" class="btn btn-success" >Volver</a>
                 </div>
+
+                <div class="d-flex flex-row-reverse mb-3">
+                    <a href="{{ route('nomina-export', $empleado->matricula) }}" class="btn btn-success">Descargar historial</a>
+                </div>
                 
 
                 <table class="table">

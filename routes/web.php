@@ -79,6 +79,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/nomina', [NominaController::class, 'show'])->name('show_nomina');
     Route::get('/nomina/{nomina}', [NominaController::class, 'details'])->name('details-nomina');
     Route::get('/nomina/pdf/{id}', [NominaController::class, 'descargarPDF'])->name('nomina-pdf');
+    Route::get('/nomina/export/{matricula}', [NominaController::class, 'export'])->name('nomina-export');
 
     Route::get('/licencia', [LicenciaController::class, 'show'])->name('show_licencia');
 

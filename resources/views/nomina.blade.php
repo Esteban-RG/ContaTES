@@ -9,11 +9,13 @@
                     <div class="card shadow-sm mb-4">
                         <div class="card-body">
                             <header>
-                                <h2 class="text-lg font-medium text-gray-900">
+                                <h2 class="text-lg font-medium text-gray-900 ">
                                     Historial de nomina
                                 </h2>
                             </header>       
-                            
+                            <div class="d-flex flex-row-reverse mb-3">
+                                <a href="{{ route('nomina-export', $nominas[0]->empleado->matricula) }}" class="btn btn-success">Descargar historial</a>
+                            </div>
 
                             <table class="table">
                                 <thead>
@@ -36,6 +38,7 @@
                                     @endforeach
                                 </tbody>
                             </table>
+
                         </div>
                     </div>
                 </div>
