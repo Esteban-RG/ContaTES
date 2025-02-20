@@ -120,7 +120,7 @@
 
                 <div class="col-lg-5">
                     <div class="images-overlap">
-                        <img src="{{ asset('img/img_v_1.jpg') }}" alt="student" class="img-fluid img-1"
+                        <img src="{{ asset('img/blog-3.jpg') }}" alt="student" class="img-fluid img-1"
                             data-aos="fade-up">
                     </div>
                 </div>
