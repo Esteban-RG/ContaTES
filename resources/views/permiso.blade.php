@@ -24,7 +24,7 @@
                                 <div>
                                     <label for="dynamicCombobox" class="form-label">Selecciona tipo de permiso</label>
                                     <select class="form-select" id="descripcion" name="descripcion">
-                                        <option selected>Selecciona plaza</option>
+                                        <option selected>Selecciona tipo de permiso</option>
                                         <option value="sin_sueldo">Sin goce de sueldo</option>
                                         <option value="economico">Dia economico</option>
                                         <option value="falta">Falta</option>

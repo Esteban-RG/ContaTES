@@ -22,8 +22,8 @@ class ExampleEmployeSeeder extends Seeder
             // Insertar el usuario
             DB::table('users')->insert([
                 'id' => 255,
-                'name' => 'EstebanRG',
-                'email' => 'ricardoespace@gmail.com',
+                'name' => 'JhonDoe',
+                'email' => 'jhondoe@gmail.com',
                 'password' => Hash::make('12345678'),
                 'role' => 'user',
                 'created_at' => now(),
@@ -36,10 +36,10 @@ class ExampleEmployeSeeder extends Seeder
             ['id' => 255], // Condición para buscar el registro
             [
                 'user_id' => 255,
-                'nombre' => 'Ricardo Esteban',
-                'ap_paterno' => 'Reyes',
-                'ap_materno' => 'Gutierrez',
-                'telefono' => '5959528172',
+                'nombre' => 'Jhon',
+                'ap_paterno' => 'Doe',
+                'ap_materno' => 'Martinez',
+                'telefono' => '5567829384',
                 'genero' => 'M',
             ]
         );
@@ -49,7 +49,7 @@ class ExampleEmployeSeeder extends Seeder
             ['id' => 255], // Condición para buscar el registro
             [
                 'persona_id' => 255,
-                'matricula' => 2021451014,
+                'matricula' => 8000,
                 'fecha_ingreso' => now(),
                 'plaza_id' => 1,
                 'curp' => 'test',
