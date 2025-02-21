@@ -2,7 +2,7 @@
 
     <div class="page-title light-background">
       <div class="container text-center">
-          <p>Authenticacion por dos pasos con Google Authenticator activada</p>
+          <p>Autenticacion por dos pasos con Google Authenticator activada</p>
           <p>Visita tu perfil para conocer tu clave</p>
 
       </div>
@@ -55,7 +55,6 @@
 
                 
               </div>
-              @if(Auth::user()->empleado )
               <div class="row mt-5" >
                 <div class="col-4 col-sm-4 col-md-4 col-lg-4">
                   <a href="{{ route('show_licencia') }}">
@@ -95,7 +94,6 @@
                 </div>
                 
               </div>
-              @endif
              
   
             </div>
