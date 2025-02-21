@@ -15,9 +15,7 @@ class LicenciaController extends Controller
     {
         $user = User::with(['persona.empleado.permisos'])->find($request->user()->id); 
 
-        if($user->empleado == null){
-            return view('home');
-        }
+        
 
         // Verificar si el usuario existe
         if (!$user || !$user->persona || !$user->persona->empleado) {

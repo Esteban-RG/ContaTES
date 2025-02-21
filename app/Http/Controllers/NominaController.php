@@ -27,9 +27,7 @@ class NominaController extends Controller
     {
         $user = User::with(['persona.empleado.nominas'])->find($request->user()->id); 
 
-        if($user->empleado == null){
-            return view('home');
-        }
+        
         // Verificar si el usuario existe
         if (!$user || !$user->persona || !$user->persona->empleado) {
             abort(404, 'Usuario no encontrado o sin datos de nómina');
