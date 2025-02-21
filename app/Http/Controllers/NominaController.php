@@ -2,17 +2,22 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Deduccion;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 use App\Models\User;
 use App\Models\Empleado;
 use App\Models\Nomina;
+use App\Models\ISR;
+use App\Models\OtraDeduccion;
+use App\Models\Percepcion;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 use Barryvdh\DomPDF\Facade\Pdf ;
 use PhpOffice\PhpSpreadsheet\Style\Fill;
-use PhpOffice\PhpSpreadsheet\Style\Font;
 use PhpOffice\PhpSpreadsheet\Style\Alignment;
+use Illuminate\Http\RedirectResponse;
+
 
 
 
@@ -32,6 +37,99 @@ class NominaController extends Controller
 
         return view('nomina', compact(['user', 'nominas']));
     }
+
+
+    public function store(Request $request, Empleado $empleado): RedirectResponse
+    {
+
+
+        $request->validate([
+            'fecha_inicio' => ['required', 'date'],
+            'fecha_fin' => ['required', 'date', 'after_or_equal:fecha_inicio'],
+        ]);
+
+        $nomina = Nomina::create([
+            'fecha_inicio' => $request->fecha_inicio,
+            'fecha_fin' => $request->fecha_fin,
+            'empleado_id' => $empleado->id 
+        ]);
+
+        $deducciones_globales = OtraDeduccion::all();
+        $sueldo_quincenal = $empleado->plaza->sueldo;
+        $sueldo_quincenal_neto = $sueldo_quincenal;
+        $sueldo_quincenal_bruto = $sueldo_quincenal;
+
+        //APLICAR DEDUCCIONES
+        foreach ($deducciones_globales as $key => $deduccion_global) {
+
+            if ($deduccion_global->tipo == 'porcentual') {
+                $deduccion_aplicada = $sueldo_quincenal * ($deduccion_global->valor / 100);
+            } elseif ($deduccion_global->tipo == 'fijo') {
+                $deduccion_aplicada = $deduccion_global->valor;
+            }
+
+            $deduccion = Deduccion::create([
+                'nombre' => $deduccion_global->descripcion,
+                'valor' => $deduccion_aplicada,
+                'nomina_id' => $nomina->id,
+            ]);
+
+            $sueldo_quincenal_neto -= $deduccion_aplicada;
+            
+        }
+
+        //CALCULAR ISR
+
+        $tarifas_isr = ISR::all();
+
+        foreach ($tarifas_isr as $tarifa) 
+        {
+            if ($sueldo_quincenal_neto >= $tarifa->limite_inferior &&
+                ($tarifa->limite_superior === null || $sueldo_quincenal_neto <= $tarifa->limite_superior)) 
+            {
+            
+                $isr_aplicado = $tarifa->cuota_fija + ($sueldo_quincenal_neto - $tarifa->limite_inferior) * ($tarifa->porcentaje_aplicable / 100);
+                
+                Deduccion::create([
+                    'nombre' => 'ISR',
+                    'valor' => $isr_aplicado,
+                    'nomina_id' => $nomina->id,
+                ]);
+                $sueldo_quincenal_neto -= $isr_aplicado; // Restar el ISR del sueldo neto
+                break;
+            }
+        }
+
+        //APLICAR PERCEPCIONES
+        
+        $percepcion = Percepcion::create([
+            'nombre' => 'Sueldo quincenal',
+            'valor' => $sueldo_quincenal,
+            'nomina_id' => $nomina->id,
+        ]);
+
+        $bonos = $empleado->bonos;
+
+        foreach ($bonos as $key => $bono) {
+            $percepcion = Percepcion::create([
+                'nombre' => $bono->descripcion,
+                'valor' => $bono->monto,
+                'nomina_id' => $nomina->id,
+            ]);
+
+            $sueldo_quincenal_bruto += $bono->monto;
+            $sueldo_quincenal_neto += $bono->monto;
+        }
+
+        $nomina->salario_bruto = $sueldo_quincenal_bruto;
+        $nomina->salario_neto = $sueldo_quincenal_neto;
+
+        $nomina->save();
+
+        return redirect()->route('empleado-show-nomina',$empleado->id )->with('success', 'Nomina generada correctamente.');
+    }
+
+
 
     public function details(Request $request, Nomina $nomina): View
     {

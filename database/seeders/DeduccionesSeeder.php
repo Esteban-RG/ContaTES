@@ -15,17 +15,17 @@ class DeduccionesSeeder extends Seeder
     public function run(): void
     {
         DB::table('tarifa_isr')->insert([
-            ['limite_inferior' => 0.01,    'limite_superior' => 8952.49,   'cuota_fija' => 0,    'porcentaje_aplicable' => 1.92],
-            ['limite_inferior' => 8952.50,    'limite_superior' => 75984.55,   'cuota_fija' => 171.88,    'porcentaje_aplicable' => 6.40],
-            ['limite_inferior' => 75984.56,   'limite_superior' => 133536.07,  'cuota_fija' => 4461.94,   'porcentaje_aplicable' => 10.88],
-            ['limite_inferior' => 133536.08,  'limite_superior' => 155229.80,  'cuota_fija' => 10723.55,  'porcentaje_aplicable' => 16.00],
-            ['limite_inferior' => 155229.81,  'limite_superior' => 185852.57,  'cuota_fija' => 14194.54,  'porcentaje_aplicable' => 17.92],
-            ['limite_inferior' => 185852.58,  'limite_superior' => 374837.88,  'cuota_fija' => 19682.13,  'porcentaje_aplicable' => 21.36],
-            ['limite_inferior' => 374837.89,  'limite_superior' => 590795.99,  'cuota_fija' => 60048.40,  'porcentaje_aplicable' => 23.52],
-            ['limite_inferior' => 590796.00,  'limite_superior' => 1127926.84, 'cuota_fija' => 110842.74, 'porcentaje_aplicable' => 30.00],
-            ['limite_inferior' => 1127926.85, 'limite_superior' => 1503902.46, 'cuota_fija' => 271981.99, 'porcentaje_aplicable' => 32.00],
-            ['limite_inferior' => 1503902.47, 'limite_superior' => 4511707.37, 'cuota_fija' => 392294.17, 'porcentaje_aplicable' => 34.00],
-            ['limite_inferior' => 4511707.38, 'limite_superior' => null,        'cuota_fija' => 1414947.85,'porcentaje_aplicable' => 35.00]
+            ['limite_inferior' => 0.01, 'limite_superior' => 368.10, 'cuota_fija' => 0, 'porcentaje_aplicable' => 1.92],
+            ['limite_inferior' => 368.11, 'limite_superior' => 3124.35, 'cuota_fija' => 7.05, 'porcentaje_aplicable' => 6.40],
+            ['limite_inferior' => 3124.36, 'limite_superior' => 5490.75, 'cuota_fija' => 183.45, 'porcentaje_aplicable' => 10.88],
+            ['limite_inferior' => 5490.76, 'limite_superior' => 6382.80, 'cuota_fija' => 441, 'porcentaje_aplicable' => 16.00],
+            ['limite_inferior' => 6382.81, 'limite_superior' => 7641.90, 'cuota_fija' => 583.65, 'porcentaje_aplicable' => 17.92],
+            ['limite_inferior' => 7641.91, 'limite_superior' => 15412.80, 'cuota_fija' => 809.25, 'porcentaje_aplicable' => 21.36],
+            ['limite_inferior' => 15412.81, 'limite_superior' => 24292.65, 'cuota_fija' => 2469.15, 'porcentaje_aplicable' => 23.52],
+            ['limite_inferior' => 24292.66, 'limite_superior' => 46378.50, 'cuota_fija' => 4557.75, 'porcentaje_aplicable' => 30.00],
+            ['limite_inferior' => 46378.51, 'limite_superior' => 61838.10, 'cuota_fija' => 11183.40, 'porcentaje_aplicable' => 32.00],
+            ['limite_inferior' => 61838.11, 'limite_superior' => 185514.30, 'cuota_fija' => 16130.55, 'porcentaje_aplicable' => 34.00],
+            ['limite_inferior' => 185514.31, 'limite_superior' => null, 'cuota_fija' => 58180.35, 'porcentaje_aplicable' => 35.00]
         ]);
 
 

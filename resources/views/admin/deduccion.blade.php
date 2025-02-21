@@ -107,30 +107,29 @@
     </table>
 
     <div class="m-3">
-        <h1>Tarifas ISR</h1>
+        <h1>Tarifas ISR Quincenal</h1>
     </div>
 
     <table class="table">
         <thead>
             <tr>
-                <th scope="col">Limite inferior</th>
-                <th scope="col">Limite Superior</th>
-                <th scope="col">Cuota fija</th>
-                <th scope="col">Porcentaje aplicable</th>
+                <th scope="col">Límite Inferior</th>
+                <th scope="col">Límite Superior</th>
+                <th scope="col">Cuota Fija</th>
+                <th scope="col">Porcentaje Aplicable</th>
                 <th scope="col">Acciones</th>
             </tr>
         </thead>
         <tbody>
             @foreach ($tarifas_isr as $tarifa_isr)
                 <tr>
-                    <td>{{ $tarifa_isr->limite_inferior }}</td>
-                    <td>{{ $tarifa_isr->limite_superior }}</td>
-                    <td>{{ $tarifa_isr->cuota_fija }}</td>
-                    <td>{{ $tarifa_isr->porcentaje_aplicable }}</td>
+                    <td>${{ number_format($tarifa_isr->limite_inferior, 2, '.', ',') }}</td>
+                    <td>${{ number_format($tarifa_isr->limite_superior, 2, '.', ',') }}</td>
+                    <td>${{ number_format($tarifa_isr->cuota_fija, 2, '.', ',') }}</td>
+                    <td>{{ number_format($tarifa_isr->porcentaje_aplicable, 2) }}%</td>
                     <td>                        
-                        <a href="{{ route('admin-tarifa-edit',  $tarifa_isr->id) }}" class="btn btn-primary">Editar</a>
+                        <a href="{{ route('admin-tarifa-edit', $tarifa_isr->id) }}" class="btn btn-primary">Editar</a>
                     </td>
-                    
                 </tr>
             @endforeach
         </tbody>
