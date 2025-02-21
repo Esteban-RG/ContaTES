@@ -25,9 +25,9 @@
             </li>
 
             <li>
-              <form action="{{ route('logout') }}" method="POST">
+              <form action="{{ route('logout') }}" method="POST" onsubmit="return confirm('¿Estás seguro deseas cerrar sesión?');">
                 @csrf
-                <button type="submit" class="btn btn-danger">Salir</button>
+                <button type="submit" class="m-3 btn btn-danger">Salir</button>
               </form>
             </li>
 

@@ -5,6 +5,7 @@ use App\Http\Middleware\CheckRole;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
+use PragmaRX\Google2FALaravel\Middleware as GoogleMiddleware;
 
 return Application::configure(basePath: dirname(__DIR__))
     ->withRouting(
@@ -16,6 +17,7 @@ return Application::configure(basePath: dirname(__DIR__))
         $middleware->alias([
             'admin' => AdminMiddleware::class,
             'isAdmin' => CheckRole::class,
+            '2fa' => GoogleMiddleware::class,
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {

@@ -11,6 +11,7 @@ use App\Http\Controllers\Admin\AdminTarifas;
 use App\Http\Controllers\NominaController;
 use App\Http\Controllers\LicenciaController;
 use App\Http\Controllers\PermisoController;
+use App\Http\Controllers\TwoFactorAuthController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Auth\ConfirmablePasswordController;
@@ -23,6 +24,9 @@ use App\Http\Controllers\Auth\NewPasswordController;
 use App\Http\Controllers\Auth\PasswordResetLinkController;
 use App\Http\Controllers\ProfileController;
 
+
+Route::get('/2fa', [TwoFactorAuthController::class, 'show2faForm'])->name('2fa.form');
+Route::post('/2fa/verify', [TwoFactorAuthController::class, 'verify2fa'])->name('2fa.verify');
 
 Route::get('/', function () {
     return view('guest');
@@ -43,20 +47,28 @@ Route::get('/forgot', function () {
 });
 
 
-
-
-
+// Rutas para 2FA
 Route::middleware('auth')->group(function () {
+   
+    
+
+});
+
+
+
+Route::middleware('auth','2fa')->group(function () {
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])
+    ->name('logout');
+
     Route::get('/home', function () {
         return view('home');
     })->name('home')->middleware('isAdmin');
 
-    Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])
-    ->name('logout');
-
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    
+    
 
     Route::get('verify-email', EmailVerificationPromptController::class)
         ->name('verification.notice');

@@ -3,7 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ProfileUpdateRequest;
-use App\Http\Requests\PersonalUpdateRequest;
+use PragmaRX\Google2FALaravel\Support\Authenticator;
+use PragmaRX\Google2FAQRCode\Google2FA;
 use App\Models\Persona;
 use App\Models\User;
 use Illuminate\Http\RedirectResponse;
@@ -11,7 +12,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
-use PhpParser\Node\Stmt\ElseIf_;
 
 class ProfileController extends Controller
 {
@@ -20,13 +20,69 @@ class ProfileController extends Controller
      */
     public function edit(Request $request): View
     {
-        $user = User::with(['persona.empleado.plaza'])->find($request->user()->id);
+        // Obtener usuario con relaciones
+        $user = User::with(['persona.empleado.plaza'])->findOrFail($request->user()->id);
 
-        if (!$user) {
-            abort(404, 'Usuario no encontrado');
+        $qrCodeUrl = null;
+        $secret = null;
+
+        // Generar QR solo si 2FA no está habilitado
+        if (!$user->google2fa_enabled) {
+            $google2fa = new Google2FA();
+
+            // Generar/regenerar clave secreta si no existe
+            if (empty($user->google2fa_secret)) {
+                $user->google2fa_secret = $google2fa->generateSecretKey();
+                $user->save();
+            }
+
+            // Generar URL del QR
+            $qrCodeUrl = $google2fa->getQRCodeUrl(
+                config('app.name'),
+                $user->email,
+                $user->google2fa_secret
+            );
+            
+            $secret = $user->google2fa_secret;
         }
 
-        return view('profile.edit', compact('user'));
+        return view('profile.edit', [
+            'user' => $user,
+            'qrCodeUrl' => $qrCodeUrl,
+            'secret' => $secret,
+        ]);
+    }
+
+    // Habilitar 2FA
+    public function enable2fa(Request $request)
+    {
+        $request->validate([
+            'one_time_password' => 'required',
+        ]);
+
+        $user = $request->user();
+        $authenticator = app(Authenticator::class)->boot($request);
+
+        // Verificar el código OTP
+        if ($authenticator->verifyGoogle2FA($user->google2fa_secret, $request->one_time_password)) {
+            $user->google2fa_enabled = true;
+            $user->save();
+
+            return redirect()->route('profile.edit')->with('success', '2FA has been enabled.');
+        }
+
+        return back()->withErrors(['one_time_password' => 'Invalid one time password.']);
+    }
+
+    // Deshabilitar 2FA
+    public function disable2fa(Request $request)
+    {
+        $user = $request->user();
+        $user->google2fa_secret = null;
+        $user->google2fa_enabled = false;
+        $user->save();
+
+        return redirect()->route('profile.edit')->with('success', '2FA has been disabled.');
     }
 
     /**
