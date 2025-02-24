@@ -16,7 +16,7 @@
               <div class="row">
                 <div class="col-4 col-sm-4 col-md-4 col-lg-4">
                   <a href="{{ route('profile.edit')}}">
-                    <div class="services-item" data-aos="fade-up" data-aos-delay="">
+                    <div class="services-item" data-aos="fade-up" data-aos-delay="100">
                       <div class="services-icon">
                         <i class="bi bi-person"></i>
                       </div>
@@ -28,7 +28,7 @@
                 </div>
                 <div class="col-4 col-sm-4 col-md-4 col-lg-4">
                   <a href="{{ route('terminos') }}">
-                    <div class="services-item" data-aos="fade-up" data-aos-delay="400">
+                    <div class="services-item" data-aos="fade-up" data-aos-delay="200">
                       <div class="services-icon">
                         <i class="bi bi-shield-check"></i>
                       </div>
@@ -40,7 +40,7 @@
                 </div>
                 <div class="col-4 col-sm-4 col-md-4 col-lg-4">
                   <a href="{{ route('contact') }}">
-                    <div class="services-item" data-aos="fade-up" data-aos-delay="600">
+                    <div class="services-item" data-aos="fade-up" data-aos-delay="300">
                       <div class="services-icon">
                         <i class="bi bi-envelope"></i>
                       </div>
@@ -52,13 +52,15 @@
                 </div>
 
 
-
+                
                 
               </div>
+
+              @if($user->persona && $user->persona->empleado)
               <div class="row mt-5" >
                 <div class="col-4 col-sm-4 col-md-4 col-lg-4">
                   <a href="{{ route('show_licencia') }}">
-                    <div class="services-item" data-aos="fade-up" data-aos-delay="300">
+                    <div class="services-item" data-aos="fade-up" data-aos-delay="400">
                       <div class="services-icon">
                         <i class="bi bi-globe"></i>
                       </div>
@@ -70,7 +72,7 @@
                 </div>
                 <div class="col-4 col-sm-4 col-md-4 col-lg-4">
                   <a href="{{ route('show_nomina') }}">
-                    <div class="services-item" data-aos="fade-up" data-aos-delay="100">
+                    <div class="services-item" data-aos="fade-up" data-aos-delay="500">
                       <div class="services-icon">
                         <i class="bi bi-cash-stack"></i>
                       </div>
@@ -81,19 +83,21 @@
                   </a>
                 </div>
                 <div class="col-4 col-sm-4 col-md-4 col-lg-4">
-                  <a href="">
-                    <div class="services-item" data-aos="fade-up" data-aos-delay="200">
+                  <a href="{{ route("show-expediente") }}">
+                    <div class="services-item" data-aos="fade-up" data-aos-delay="600">
                       <div class="services-icon">
                         <i class="bi bi-grid"></i>
                       </div>
                       <div>
-                        <h3>EXPEDIENTES</h3>
+                        <h3>EXPEDIENTE</h3>
                       </div>
                     </div>
                   </a>
                 </div>
                 
-              </div>
+              </div> 
+              @endif
+              
              
   
             </div>

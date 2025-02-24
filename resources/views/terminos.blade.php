@@ -8,7 +8,7 @@
 
 <!-- Windows Section -->
 <section id="terminos" class="section d-flex justify-content-center align-items-center text-center">
-    <div class="col-6">
+    <div class="col-9 col-md-6">
         <h1>TERMINOS Y CONDICIONES</h1>
     <p>Bienvenido al sitio web de contaTES, dedicado al desarrollo e implementación de un sistema de gestión y
         administración eficiente de nóminas para el Tecnológico de Estudios Superiores de Chimalhuacán

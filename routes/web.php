@@ -11,7 +11,9 @@ use App\Http\Controllers\Admin\AdminTarifas;
 use App\Http\Controllers\NominaController;
 use App\Http\Controllers\LicenciaController;
 use App\Http\Controllers\PermisoController;
+use App\Http\Controllers\ExpedienteController;
 use App\Http\Controllers\TwoFactorAuthController;
+use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Auth\ConfirmablePasswordController;
@@ -63,9 +65,9 @@ Route::middleware('auth','2fa')->group(function () {
     Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])
     ->name('logout');
 
-    Route::get('/home', function () {
-        return view('home');
-    })->name('home')->middleware('isAdmin');
+    
+
+    Route::get('/home', [HomeController::class, 'show'])->name('home')->middleware('isAdmin');
 
     
     
@@ -98,6 +100,8 @@ Route::middleware('auth','2fa')->group(function () {
 
     Route::get('/permiso', [PermisoController::class, 'show'])->name('show-permiso');
     Route::post('/permiso', [PermisoController::class, 'store'])->name('store-permiso');
+
+    Route::get('/expediente', [ExpedienteController::class, 'show'])->name('show-expediente');
 
 
 

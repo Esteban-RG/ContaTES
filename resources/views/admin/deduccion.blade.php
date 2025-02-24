@@ -78,7 +78,7 @@
                 <th scope="col">Id</th>
                 <th scope="col">Nombre</th>
                 <th scope="col">Tipo</th>
-                <th scope="col">Monto</th>
+                <th scope="col">Valor</th>
                 <th scope="col" colspan=2>Acciones</th>
             </tr>
         </thead>
@@ -88,7 +88,7 @@
                     <td>{{ $deduccion->id }}</td>
                     <td>{{ $deduccion->descripcion }}</td>
                     <td>{{ $deduccion->tipo }}</td>
-                    <td>{{ $deduccion->valor }}</td>
+                    <td>{{ number_format($deduccion->valor, 2, '.', ',') }}</td>
                     <td>                        
                         <a href="{{ route('admin-deduccion-edit',  $deduccion->id) }}" class="btn btn-primary">Editar</a>
                     </td>

@@ -72,7 +72,7 @@
                 <tr>
                     <td>{{ $bono->id }}</td>
                     <td>{{ $bono->descripcion }}</td>
-                    <td>{{ $bono->monto }}</td>
+                    <td>${{ number_format($bono->monto, 2, '.', ',') }}</td>
                     <td>                        
                         <a href="{{ route('admin-bono-edit',  $bono->id) }}" class="btn btn-primary">Editar</a>
                     </td>

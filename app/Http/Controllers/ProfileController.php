@@ -30,13 +30,11 @@ class ProfileController extends Controller
         if (!$user->google2fa_enabled) {
             $google2fa = new Google2FA();
 
-            // Generar/regenerar clave secreta si no existe
             if (empty($user->google2fa_secret)) {
                 $user->google2fa_secret = $google2fa->generateSecretKey();
                 $user->save();
             }
 
-            // Generar URL del QR
             $qrCodeUrl = $google2fa->getQRCodeUrl(
                 config('app.name'),
                 $user->email,

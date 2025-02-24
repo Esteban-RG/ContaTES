@@ -73,7 +73,7 @@
                 <tr>
                     <td>{{ $plaza->id }}</td>
                     <td>{{ $plaza->nombre }}</td>
-                    <td>{{ $plaza->sueldo }}</td>
+                    <td>${{ number_format($plaza->sueldo, 2, '.', ',') }}</td>
                     <td>                        
                         <a href="{{ route('admin-plaza-edit',  $plaza->id) }}" class="btn btn-primary">Editar</a>
                     </td>

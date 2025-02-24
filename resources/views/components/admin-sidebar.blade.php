@@ -49,8 +49,6 @@
                 <strong>{{ Auth::user()->name }}</strong>
             </a>
             <ul class="dropdown-menu dropdown-menu-dark text-small shadow">
-                <li><a class="dropdown-item" href="{{ route('profile.edit')}}">Perfil</a></li>
-                <li><hr class="dropdown-divider"></li>
                 <form action="{{ route('logout') }}" method="POST">
                     @csrf
                     <button class=" dropdown-item"> Cerrar Sesión </button>
