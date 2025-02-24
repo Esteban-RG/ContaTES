@@ -19,6 +19,6 @@ class Permiso extends Model
 
     public function empleado()
     {
-        return $this->belongsTo(Nomina::class)->withTimestamps();
+        return $this->belongsTo(Empleado::class);
     }
 }

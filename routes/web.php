@@ -2,7 +2,7 @@
 
 use App\Http\Controllers\Admin\AdminUsers;
 use App\Http\Controllers\Admin\AdminPlazas;
-use App\Http\Controllers\Admin\AdminVacaciones;
+use App\Http\Controllers\Admin\AdminPermisos;
 use App\Http\Controllers\Admin\AdminBonos;
 use App\Http\Controllers\Admin\AdminEmpleados;
 use App\Http\Controllers\Admin\AdminDeducciones;
@@ -152,11 +152,16 @@ Route::middleware(['auth','admin'])->group(function () {
     Route::get('/admin/plaza/{plaza}/edit/',[AdminPlazas::class, 'edit'])->name('admin-plaza-edit');
     Route::put('/admin/plaza/{plaza}',[AdminPlazas::class, 'update'])->name('admin-plaza-update');
 
-    Route::get('/admin/vacaciones', [AdminVacaciones::class, 'show'] )->name('admin-vacaciones');
-    Route::post('/admin/vacaciones',[AdminVacaciones::class, 'store' ])->name('admin-vacaciones-create');
-    Route::delete('/admin/vacaciones/{vacaciones}',[AdminVacaciones::class, 'destroy'])->name('admin-vacaciones-destroy');
-    Route::get('/admin/vacaciones/{vacaciones}/edit/',[AdminVacaciones::class, 'edit'])->name('admin-vacaciones-edit');
-    Route::put('/admin/vacaciones/{vacaciones}',[AdminVacaciones::class, 'update'])->name('admin-vacaciones-update');
+    Route::get('/admin/permisos', [AdminPermisos::class, 'show'] )->name('admin-permisos');
+    Route::post('/admin/permisos',[AdminPermisos::class, 'store' ])->name('admin-permisos-create');
+    Route::delete('/admin/permisos/{permisos}',[AdminPermisos::class, 'destroy'])->name('admin-permisos-destroy');
+    Route::get('/admin/permisos/{permisos}/edit/',[AdminPermisos::class, 'edit'])->name('admin-permisos-edit');
+
+    Route::put('/admin/permisos/{permisos}/allow',[AdminPermisos::class, 'allow'])->name('admin-permisos-allow');
+    Route::put('/admin/permisos/{permisos}/deny',[AdminPermisos::class, 'deny'])->name('admin-permisos-deny');
+
+
+
 
     Route::get('/admin/bono', [AdminBonos::class, 'show'] )->name('admin-bono');
     Route::post('/admin/bono',[AdminBonos::class, 'store' ])->name('admin-bono-create');

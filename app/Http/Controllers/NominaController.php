@@ -43,6 +43,7 @@ class NominaController extends Controller
     public function store(Request $request, Empleado $empleado): RedirectResponse
     {
 
+       
 
         $request->validate([
             'fecha_inicio' => ['required', 'date'],
@@ -55,16 +56,41 @@ class NominaController extends Controller
             'empleado_id' => $empleado->id 
         ]);
 
+        $fecha_inicio = $request -> fecha_inicio;
+        $fecha_fin = $request -> fecha_fin;
+
         $deducciones_globales = OtraDeduccion::all();
         $sueldo_quincenal = $empleado->plaza->sueldo;
         $sueldo_quincenal_neto = $sueldo_quincenal;
         $sueldo_quincenal_bruto = $sueldo_quincenal;
 
+        //APLICAR PERCEPCIONES
+        
+        $percepcion = Percepcion::create([
+            'nombre' => 'Sueldo quincenal',
+            'valor' => $sueldo_quincenal,
+            'nomina_id' => $nomina->id,
+        ]);
+
+        $bonos = $empleado->bonos;
+
+        foreach ($bonos as $key => $bono) {
+            $percepcion = Percepcion::create([
+                'nombre' => $bono->descripcion,
+                'valor' => $bono->monto,
+                'nomina_id' => $nomina->id,
+            ]);
+
+            $sueldo_quincenal_bruto += $bono->monto;
+            $sueldo_quincenal_neto += $bono->monto;
+        }
+
+
         //APLICAR DEDUCCIONES
         foreach ($deducciones_globales as $key => $deduccion_global) {
 
             if ($deduccion_global->tipo == 'porcentual') {
-                $deduccion_aplicada = $sueldo_quincenal * ($deduccion_global->valor / 100);
+                $deduccion_aplicada = $sueldo_quincenal_bruto * ($deduccion_global->valor / 100);
             } elseif ($deduccion_global->tipo == 'fijo') {
                 $deduccion_aplicada = $deduccion_global->valor;
             }
@@ -77,6 +103,24 @@ class NominaController extends Controller
 
             $sueldo_quincenal_neto -= $deduccion_aplicada;
             
+        }
+
+        $permisos = $empleado->permisos()
+                ->where('estado', 'aceptado')
+                ->whereIn('descripcion', ['sin_sueldo', 'falta'])
+                ->whereBetween('fecha', [$fecha_inicio, $fecha_fin])
+                ->get();
+
+        $sueldo_por_dia = $sueldo_quincenal / 15;
+
+        foreach ($permisos as $permiso){
+            $deduccion = Deduccion::create([
+                'nombre' => $permiso->descripcion." (".$permiso->fecha.")",
+                'valor' => $sueldo_por_dia,
+                'nomina_id' => $nomina->id,
+            ]);
+            $sueldo_quincenal_neto -= $sueldo_por_dia;
+
         }
 
         //CALCULAR ISR
@@ -101,27 +145,13 @@ class NominaController extends Controller
             }
         }
 
-        //APLICAR PERCEPCIONES
+       
+
         
-        $percepcion = Percepcion::create([
-            'nombre' => 'Sueldo quincenal',
-            'valor' => $sueldo_quincenal,
-            'nomina_id' => $nomina->id,
-        ]);
 
-        $bonos = $empleado->bonos;
+        
 
-        foreach ($bonos as $key => $bono) {
-            $percepcion = Percepcion::create([
-                'nombre' => $bono->descripcion,
-                'valor' => $bono->monto,
-                'nomina_id' => $nomina->id,
-            ]);
-
-            $sueldo_quincenal_bruto += $bono->monto;
-            $sueldo_quincenal_neto += $bono->monto;
-        }
-
+        
         $nomina->salario_bruto = $sueldo_quincenal_bruto;
         $nomina->salario_neto = $sueldo_quincenal_neto;
 

@@ -28,7 +28,7 @@
 
         <div class="card shadow-sm mb-4">
             <div class="card-body">
-                <form action="{{ route ('admin-vacaciones-update' , $vacaciones->id)}}" method="post">
+                <form action="{{ route ('admin-permisos-update' , $permisos->id)}}" method="post">
                     @csrf
                     @method('PUT')
 
@@ -37,12 +37,12 @@
 
                         <div>
                             <x-input-label for="dia_no_laboral" :value="__('Dia no laboral')" />
-                            <x-text-input id="dia_no_laboral" name="dia_no_laboral" type="date" class="mt-1 block w-full"  value="{{$vacaciones->dia_no_laboral}}"  required autofocus />
+                            <x-text-input id="dia_no_laboral" name="dia_no_laboral" type="date" class="mt-1 block w-full"  value="{{$permisos->dia_no_laboral}}"  required autofocus />
                         </div>
 
                         <div>
                             <x-input-label for="descripcion" :value="__('Descripción')" />
-                            <x-text-input id="descripcion" name="descripcion" type="text" class="mt-1 block w-full" value="{{$vacaciones->descripcion}}" required autofocus />
+                            <x-text-input id="descripcion" name="descripcion" type="text" class="mt-1 block w-full" value="{{$permisos->descripcion}}" required autofocus />
                         </div>
                                             
                         <div class="text-center mt-3"><button class="btn btn-success w-100" type="submit">Guardar</button></div>
